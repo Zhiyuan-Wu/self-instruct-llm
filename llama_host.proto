@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+service llamahost {
+    rpc complete(Prompt) returns (Output) {}
+}
+
+message Prompt {
+    repeated string data = 1;
+}
+
+message Output {
+    repeated string data = 1;
+}
