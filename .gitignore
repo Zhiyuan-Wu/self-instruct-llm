@@ -161,6 +161,7 @@ cython_debug/
 
 data*
 llama-2-*
-tokenizer*
+tokenizer.model
+tokenizer_checklist.chk
 *.pth
 *pb2*.py

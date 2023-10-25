@@ -7,7 +7,6 @@ import argparse
 import os
 import tqdm
 import loralib
-import numpy as np
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -32,20 +31,14 @@ def parse_args():
     parser.add_argument(
         "--epoch_num",
         type=int,
-        default=5,
+        default=2,
         help="th",
     )
     parser.add_argument(
         "--batch_size",
         type=int,
         default=1,
-        help="The number of requests to send to GPT3 at a time."
-    )
-    parser.add_argument(
-        "--address",
-        type=str,
-        default="10.1.1.4:17425",
-        help="the address that host llama grpc services."
+        help="The number of requests to send to Server at a time."
     )
     return parser.parse_args()
 

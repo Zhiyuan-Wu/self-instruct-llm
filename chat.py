@@ -24,9 +24,14 @@ if __name__=="__main__":
     stub = llama_host_pb2_grpc.llamahostStub(channel)
 
     question = args.input
-    prompt = f"Task: You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature. If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don't know the answer to a question, please don't share false information. Input: {question}. Output:"
+    prompt = f"Task: You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature. If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don't know the answer to a question, please don't share false information. Input: {question}. Output: "
+    # prompt = f"Task: {question}. Output: "
     _request = llama_host_pb2.Prompt()
     _request.data.append(prompt)
-    result = stub.complete(_request).data
+    result = stub.complete(_request).data[0]
+    stop_sequences = ["<|endoftext|>",]
+    for _stop_seq in stop_sequences:
+        if _stop_seq in result:
+            result = result[:result.index(_stop_seq)]
     print(f"> {question}")
-    print(f"> {result[0]}")
+    print(f"> {result}")
